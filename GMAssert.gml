@@ -1,7 +1,6 @@
 #define __GMA_BREAKPOINT__
 {
-  //Place a breakpoint here to inspect the state just before an assertion
-  var GMA_BREAKPOINT_HERE = true;
+  var GMA_BREAKPOINT_HERE = true; //Place breakpoint here
 }
 
 #define __gma_assert_error__
@@ -481,6 +480,7 @@
 
 #define assert
 ///assert(got, [msg])
+//Assert that the gotten expression is true.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -506,6 +506,7 @@
 
 #define assert_fail
 ///assert_fail(got, [msg])
+//Assert that the gotten expression is false.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -531,6 +532,7 @@
 
 #define assert_equal
 ///assert_equal(got, expected, [msg])
+//Assert that the gotten expression is equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -556,6 +558,7 @@
 
 #define assert_equalish
 ///assert_equalish(got, expected, [msg])
+//Assert that the gotten expression is approximately equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -581,6 +584,7 @@
 
 #define assert_is
 ///assert_is(got, expected, [msg])
+//Assert that the gotten expression is exactly equal to the expected expression (as compared using ==).
 {
   if (!GMASSERT_MODE) exit;
   
@@ -606,6 +610,7 @@
 
 #define assert_not_equal
 ///assert_not_equal(got, expected, [msg])
+//Assert that the gotten expression is not equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -631,6 +636,7 @@
 
 #define assert_not_equalish
 ///assert_not_equalish(got, expected, [msg])
+//Assert that the gotten expression is not approximately equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -656,6 +662,7 @@
 
 #define assert_isnt
 ///assert_isnt(got, expected, [msg])
+//Assert that the gotten expression is not exactly equal to the expected expression (as compared using ==).
 {
   if (!GMASSERT_MODE) exit;
   
@@ -681,6 +688,7 @@
 
 #define assert_greater_than
 ///assert_greater_than(got, expected, [msg])
+//Assert that the gotten expression is greater than the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -719,6 +727,7 @@
 
 #define assert_less_than
 ///assert_less_than(got, expected, [msg])
+//Assert that the gotten expression is less than the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -757,6 +766,7 @@
 
 #define assert_greater_than_or_equal
 ///assert_greater_than_or_equal(got, expected, [msg])
+//Assert that the gotten expression is greater than or equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -795,6 +805,7 @@
 
 #define assert_less_than_or_equal
 ///assert_less_than_or_equal(got, expected, [msg])
+//Assert that the gotten expression is less than or equal to the expected expression.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -833,6 +844,7 @@
 
 #define assert_is_string
 ///assert_is_string(got, [msg])
+//Assert that the gotten expression is a string.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -858,6 +870,7 @@
 
 #define assert_is_real
 ///assert_is_real(got, [msg])
+//Assert that the gotten expression is a real number.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -883,6 +896,7 @@
 
 #define assert_is_array
 ///assert_is_array(got, [msg])
+//Assert that the gotten expression is an array.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -908,6 +922,7 @@
 
 #define assert_is_defined
 ///assert_is_defined(got, [msg])
+//Assert that the gotten expression is not undefined.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -933,6 +948,7 @@
 
 #define assert_isnt_string
 ///assert_isnt_string(got, [msg])
+//Assert that the gotten expression is not a string.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -958,6 +974,7 @@
 
 #define assert_isnt_real
 ///assert_isnt_real(got, [msg])
+//Assert that the gotten expression is not a real number.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -983,6 +1000,7 @@
 
 #define assert_isnt_array
 ///assert_isnt_array(got, [msg])
+//Assert that the gotten expression is not an array.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -1008,6 +1026,7 @@
 
 #define assert_isnt_defined
 ///assert_isnt_defined(got, [msg])
+//Assert that the gotten expression is undefined.
 {
   if (!GMASSERT_MODE) exit;
 
@@ -1033,6 +1052,7 @@
 
 #define assert_in_range
 ///assert_in_range(got, lower, upper, [msg])
+//Assert that the gotten expression is within the inclusive range between lower and upper.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -1101,6 +1121,7 @@
 
 #define assert_not_in_range
 ///assert_not_in_range(got, lower, upper, [msg])
+//Assert that the gotten expression is not within the inclusive range between lower and upper.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -1169,6 +1190,7 @@
 
 #define assert_contains
 ///assert_contains(got, content, [msg]);
+//Assert that the gotten string, list or array contains a value equal to content.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -1255,6 +1277,7 @@
 
 #define assert_contains_exact
 ///assert_contains_exact(got, content, [msg]);
+//Assert that the gotten string, list or array contains a value exactly equal to content (as compared using ==).
 {
   if (!GMASSERT_MODE) exit;
   
@@ -1341,6 +1364,7 @@
 
 #define assert_doesnt_contain
 ///assert_doesnt_contain(got, content, [msg]);
+//Assert that the gotten string, list or array does not contain a value equal to content.
 {
   if (!GMASSERT_MODE) exit;
   
@@ -1427,6 +1451,7 @@
 
 #define assert_doesnt_contain_exact
 ///assert_doesnt_contain_exact(got, content, [msg]);
+//Assert that the gotten string, list or array does not contain a value exactly equal to content (as compared using ==).
 {
   if (!GMASSERT_MODE) exit;
   

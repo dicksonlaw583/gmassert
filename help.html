@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>GMAssert v0.1.0</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+		.example, .tt {
+			font-family: monospace;
+		}
+		.entry {
+			display: block;
+			border: 2px black solid;
+			padding: 1em;
+			margin: 1em;
+		}
+		.example {
+			display: block;
+			border: 2px inset;
+			padding: 0.5em;
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<!-- Top title -->
+	<h1>GMAssert v0.1.0</h1>
+	
+	<!-- Description -->
+	<h2>Description</h2>
+	<p>GMAssert is a library containing useful assertions for debugging and automated unit testing. You can use it to alert you to undesirable runtime conditions and pause the debugger at that point for further inspection.</p>
+	
+	<!-- Installation -->
+	<h2>Installation</h2>
+	<p>Simply drag GMAssert.gml into your open project and import constants.txt as macros. If you wish to use the debugger, open <span class="tt">__GMA_BREAKPOINT__</span> and place a breakpoint on the marked line.</p>
+	
+	<!-- Index -->
+	<h2>Macro Listings</h2>
+	<dl>
+		<dt class="tt">GMASSERT_MODE</dt><dd>Set the status of all assertions. Should be set to <span class="tt">GMASSERT_MODE_ENABLED</span> to enable assertions, <span class="tt">GMASSERT_MODE_DISABLED</span> to disable assertions, or <span class="tt">GMASSERT_MODE_SELFTEST</span> when run in the workbench.</dd>
+		<dt class="tt">GMASSERT_MODE_DISABLED</dt><dd>See <span class="tt">GMASSERT_MODE</span>.</dd>
+		<dt class="tt">GMASSERT_MODE_SELFTEST</dt><dd>See <span class="tt">GMASSERT_MODE</span>.</dd>
+		<dt class="tt">GMASSERT_MODE_ENABLED</dt><dd>See <span class="tt">GMASSERT_MODE</span>.</dd>
+		<dt class="tt">GMASSERT_TOLERANCE</dt><dd>The numeric error allowed by "equalish" assertions while comparing real numbers.</dd>
+		<dt class="tt">GMASSERT_TYPE_UNDEFINED</dt><dd>Used internally to identify the undefined type.</dd>
+		<dt class="tt">GMASSERT_TYPE_REAL</dt><dd>Used internally to identify the real number type.</dd>
+		<dt class="tt">GMASSERT_TYPE_STRING</dt><dd>Used internally to identify the string type.</dd>
+		<dt class="tt">GMASSERT_TYPE_ARRAY</dt><dd>Used internally to identify the array type.</dd>
+		<dt class="tt">GMASSERT_TYPE_UNKNOWN</dt><dd>Used internally to identify any type not specified above.</dd>
+	</dl>
+	
+	<h2>Function Listings</h2>
+	<dl>
+		<h3>Basic Boolean Assertions</h3>
+		<dt><a href="#assert" class="tt">assert(got, [msg])</a></dt><dd>Assert that the gotten expression is true.</dd>
+		<dt><a href="#assert_fail" class="tt">assert_fail(got, [msg])</a></dt><dd>Assert that the gotten expression is false.</dd>
+		<h3>Equivalence/Inequivalence</h3>
+		<dt><a href="#assert_equal" class="tt">assert_equal(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is equal to the expected expression.</dd>
+		<dt><a href="#assert_equalish" class="tt">assert_equalish(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is approximately equal to the expected expression.</dd>
+		<dt><a href="#assert_is" class="tt">assert_is(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is exactly equal to the expected expression (as compared using <span class="tt">==</span>).</dd>
+		<dt><a href="#assert_not_equal" class="tt">assert_not_equal(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is not equal to the expected expression.</dd>
+		<dt><a href="#assert_not_equalish" class="tt">assert_not_equalish(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is not approximately equal to the expected expression.</dd>
+		<dt><a href="#assert_isnt" class="tt">assert_isnt(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is not exactly equal to the expected expression (as compared using <span class="tt">==</span>).</dd>
+		<h3>Arithmetic comparisons</h3>
+		<dt><a href="#assert_greater_than" class="tt">assert_greater_than(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is greater than the expected expression.</dd>
+		<dt><a href="#assert_less_than" class="tt">assert_less_than(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is less than the expected expression.</dd>
+		<dt><a href="#assert_greater_than_or_equal" class="tt">assert_greater_than_or_equal(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is greater than or equal to the expected expression.</dd>
+		<dt><a href="#assert_less_than_or_equal" class="tt">assert_less_than_or_equal(got, expected, [msg])</a></dt><dd>Assert that the gotten expression is less than or equal to the expected expression.</dd>
+		<h3>Type Checking</h3>
+		<dt><a href="#assert_is_string" class="tt">assert_is_string(got, [msg])</a></dt><dd>Assert that the gotten expression is a string.</dd>
+		<dt><a href="#assert_is_real" class="tt">assert_is_real(got, [msg])</a></dt><dd>Assert that the gotten expression is a real number.</dd>
+		<dt><a href="#assert_is_array" class="tt">assert_is_array(got, [msg])</a></dt><dd>Assert that the gotten expression is an array.</dd>
+		<dt><a href="#assert_is_defined" class="tt">assert_is_defined(got, [msg])</a></dt><dd>Assert that the gotten expression is not undefined.</dd>
+		<dt><a href="#assert_isnt_string" class="tt">assert_isnt_string(got, [msg])</a></dt><dd>Assert that the gotten expression is not a string.</dd>
+		<dt><a href="#assert_isnt_real" class="tt">assert_isnt_real(got, [msg])</a></dt><dd>Assert that the gotten expression is not a real number.</dd>
+		<dt><a href="#assert_isnt_array" class="tt">assert_isnt_array(got, [msg])</a></dt><dd>Assert that the gotten expression is not an array.</dd>
+		<dt><a href="#assert_isnt_defined" class="tt">assert_isnt_defined(got, [msg])</a></dt><dd>Assert that the gotten expression is undefined.</dd>
+		<h3>Set Operations</h3>
+		<dt><a href="#assert_in_range" class="tt">assert_in_range(got, lower, upper, [msg])</a></dt><dd>Assert that the gotten expression is within the inclusive range between <span class="tt">lower</span> and <span class="tt">upper</span>.</dd>
+		<dt><a href="#assert_not_in_range" class="tt">assert_not_in_range(got, lower, upper, [msg])</a></dt><dd>Assert that the gotten expression is not within the inclusive range between <span class="tt">lower</span> and <span class="tt">upper</span>.</dd>
+		<dt><a href="#assert_contains" class="tt">assert_contains(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array contains a value equal to <span class="tt">content</span>.</dd>
+		<dt><a href="#assert_contains_exact" class="tt">assert_contains_exact(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array contains a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</dd>
+		<dt><a href="#assert_doesnt_contain" class="tt">assert_doesnt_contain(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array does not contain a value equal to <span class="tt">content</span>.</dd>
+		<dt><a href="#assert_doesnt_contain_exact" class="tt">assert_doesnt_contain_exact(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array does not contain a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</dd>
+	</dl>
+	
+	<!-- assert -->
+	<section class="entry">
+		<a name="assert" />
+		<h2 class="tt">assert(got, [msg])</h2>
+		<p>Assert that the gotten expression is true.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert(3 &lt; 5); //Assertion OK<br />
+			assert(5 &lt; 3); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_false -->
+	<section class="entry">
+		<a name="assert_fail" />
+		<h2 class="tt">assert_fail(got, [msg])</h2>
+		<p>Assert that the gotten expression is false.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_fail(3 &gt; 5); //Assertion OK<br />
+			assert_fail(5 &gt; 3); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_equal -->
+	<section class="entry">
+		<a name="assert_equal" />
+		<h2 class="tt">assert_equal(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is equal to the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var total = 3+5;<br />
+			assert_equal(total, 8); //Assertion OK<br />
+            assert_equal(total, "8"); //Assertion failed			
+		</blockquote>
+	</section>
+	
+	<!-- assert_equalish -->
+	<section class="entry">
+		<a name="assert_equalish" />
+		<h2 class="tt">assert_equalish(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is approximately equal to the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_equalish(math_get_epsilon(), 0); //Assertion OK<br />
+			assert_equalish(0.1, 0); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_not_equal -->
+	<section class="entry">
+		<a name="assert_not_equal" />
+		<h2 class="tt">assert_not_equal(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is not equal to the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var total = 583+907;
+			assert_not_equal(total, 2016); //Assertion OK<br />
+			assert_not_equal(total, 1490); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_not_equalish -->
+	<section class="entry">
+		<a name="assert_not_equalish" />
+		<h2 class="tt">assert_not_equalish(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is not approximately equal to the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_not_equalish(0.5, 0); //Assertion OK<br />
+			assert_not_equalish(math_get_epsilon(), 0); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_isnt -->
+	<section class="entry">
+		<a name="assert_isnt" />
+		<h2 class="tt">assert_isnt(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is not exactly equal to the expected expression (as compared using <span class="tt">==</span>).</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var arrayA, arrayB;<br />
+			arrayA[0] = 5;<br />
+			arrayB[0] = 5;<br />
+			arrayA[1] = 8;<br />
+			arrayB[1] = 8;<br />
+			assert_isnt(arrayA, arrayB); //Assertion OK<br />
+			assert_isnt(arrayA, arrayA); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_greater_than -->
+	<section class="entry">
+		<a name="assert_greater_than" />
+		<h2 class="tt">assert_greater_than(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is greater than the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var result = sin(pi/3); //sqrt(3)/2<br />
+			assert_greater_than(result, 0.5); //Assertion OK<br />
+			assert_greater_than(result, 1); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_less_than -->
+	<section class="entry">
+		<a name="assert_less_than" />
+		<h2 class="tt">assert_less_than(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is less than the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var list = ds_list_create();<br />
+			ds_list_add(list, 1, 2, 3);<br />
+			assert_less_than(ds_list_size(list), 5); //Assertion OK<br />
+			assert_less_than(ds_list_size(list), 3); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_greater_than_or_equal -->
+	<section class="entry">
+		<a name="assert_greater_than_or_equal" />
+		<h2 class="tt">assert_greater_than_or_equal(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is greater than or equal to the expected expression..</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var spd = 5,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;dir = 90;<br />
+			assert_greater_than_or_equal(lengthdir_x(spd, dir), 0); //Assertion OK<br />
+			assert_greater_than_or_equal(lengthdir_y(spd, dir), 0); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_less_than_or_equal -->
+	<section class="entry">
+		<a name="assert_less_than_or_equal" />
+		<h2 class="tt">assert_less_than_or_equal(got, expected, [msg])</h2>
+		<p>Assert that the gotten expression is less than or equal to the expected expression.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_less_than_or_equal(dcos(220), 0); //Assertion OK<br />
+			assert_less_than_or_equal(dcos(330), 0); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_is_string -->
+	<section class="entry">
+		<a name="assert_is_string" />
+		<h2 class="tt">assert_is_string(got, [msg])</h2>
+		<p>Assert that the gotten expression is a string.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var str = "waahoo",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;num = pi;<br />
+			assert_is_string(str); //Assertion OK<br />
+			assert_is_string(num); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_is_real -->
+	<section class="entry">
+		<a name="assert_is_real" />
+		<h2 class="tt">assert_is_real(got, [msg])</h2>
+		<p>Assert that the gotten expression is a real number.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var num = pi;<br />
+			assert_is_real(num); //Assertion OK<br />
+			assert_is_real(string(num)); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_is_array -->
+	<section class="entry">
+		<a name="assert_is_array" />
+		<h2 class="tt">assert_is_array(got, [msg])</h2>
+		<p>Assert that the gotten expression is an array.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var array;<br />
+			array[0] = 5;<br />
+			array[1] = 8;<br />
+			var str = "waahoo";<br />
+			assert_is_array(array); //Assertion OK<br />
+			assert_is_array(str); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_is_defined -->
+	<section class="entry">
+		<a name="assert_is_defined" />
+		<h2 class="tt">assert_is_defined(got, [msg])</h2>
+		<p>Assert that the gotten expression is not undefined.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var numA = 583,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;numB = undefined;<br />
+			assert_is_defined(numA); //Assertion OK<br />
+			assert_is_defined(numB); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_isnt_string -->
+	<section class="entry">
+		<a name="assert_isnt_string" />
+		<h2 class="tt">assert_isnt_string(got, [msg])</h2>
+		<p>Assert that the gotten expression is not a string.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var str = "waahoo",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;num = pi;<br />
+			assert_isnt_string(num); //Assertion OK<br />
+			assert_isnt_string(str); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_isnt_real -->
+	<section class="entry">
+		<a name="assert_isnt_real" />
+		<h2 class="tt">assert_isnt_real(got, [msg])</h2>
+		<p>Assert that the gotten expression is not a real number.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var str = "3.14";<br />
+			assert_isnt_real(str); //Assertion OK<br />
+			assert_isnt_real(real(str)); //Assertion failed 
+		</blockquote>
+	</section>
+	
+	<!-- assert_isnt_array -->
+	<section class="entry">
+		<a name="assert_isnt_array" />
+		<h2 class="tt">assert_isnt_array(got, [msg])</h2>
+		<p>Assert that the gotten expression is not an array.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var array;<br />
+			array[0] = 5;<br />
+			array[1] = 8;<br />
+			var str = "waahoo";<br />
+			assert_isnt_array(str); //Assertion OK<br />
+			assert_isnt_array(array); //Assertion failed 
+		</blockquote>
+	</section>
+	
+	<!-- assert_isnt_defined -->
+	<section class="entry">
+		<a name="assert_isnt_defined" />
+		<h2 class="tt">assert_isnt_defined(got, [msg])</h2>
+		<p>Assert that the gotten expression is undefined.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var numA = 583,<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;numB = undefined;<br />
+			assert_isnt_defined(numB); //Assertion OK<br />
+			assert_isnt_defined(numA); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_in_range -->
+	<section class="entry">
+		<a name="assert_in_range" />
+		<h2 class="tt">assert_in_range(got, lower, upper, [msg])</h2>
+		<p>Assert that the gotten expression is within the inclusive range between <span class="tt">lower</span> and <span class="tt">upper</span>.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_in_range(pi, 3, 4); //Assertion OK<br />
+			assert_in_range(exp(1), 3, 4); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_not_in_range -->
+	<section class="entry">
+		<a name="assert_not_in_range" />
+		<h2 class="tt">assert_not_in_range(got, lower, upper, [msg])</h2>
+		<p>Assert that the gotten expression is not within the inclusive range betwee, <span class="tt">lower</span> and <span class="tt">upper</span>.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			assert_not_in_range(sin(pi/4), 0, 1/2); //Assertion OK<br />
+			assert_not_in_range(sin(pi/8), 0, 1/2); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_contains -->
+	<section class="entry">
+		<a name="assert_contains" />
+		<h2 class="tt">assert_contains(got, content, [msg])</h2>
+		<p>Assert that Assert that the gotten string, list or array contains a value exactly equal to <span class="tt">content</span>.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var list = ds_list_create();<br />
+			ds_list_add(list, 1, 2, "waahoo", 3, 4);<br />
+			assert_contains(list, "waahoo"); //Assertion OK<br />
+			assert_contains(list, "WAAHOO"); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_contains_exact -->
+	<section class="entry">
+		<a name="assert_contains_exact" />
+		<h2 class="tt">assert_contains_exact(got, content, [msg])</h2>
+		<p>Assert that the gotten string, list or array contains a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var sentence = "The quick brown fox jumps over the lazy dog";<br />
+			assert_contains_exact(sentence, "fox"); //Assertion OK<br />
+			assert_contains_exact(sentence, "armadillo"); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_doesnt_contain -->
+	<section class="entry">
+		<a name="assert_doesnt_contain" />
+		<h2 class="tt">assert_doesnt_contain(got, content, [msg])</h2>
+		<p>Assert that Assert that the gotten string, list or array does not contain a value equal to <span class="tt">content</span>.</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var animals;<br />
+			animals[0] = "ant";<br />
+			animals[1] = "bear";<br />
+			animals[2] = "cat";<br />
+			assert_doesnt_contain(animals, "butterfly"); //Assertion OK<br />
+			assert_doesnt_contain(animals, "bear"); //Assertion failed
+		</blockquote>
+	</section>
+	
+	<!-- assert_doesnt_contain_exact -->
+	<section class="entry">
+		<a name="assert_doesnt_contain_exact" />
+		<h2 class="tt">assert_doesnt_contain_exact(got, content, [msg])</h2>
+		<p>Assert that Assert that the gotten string, list or array does not contain a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</p>
+		<h4>Example</h4>
+		<blockquote class="example">
+			var list = ds_list_create();<br />
+			ds_list_add(list, 1, 2, "waahoo", 3, 4);<br />
+			assert_doesnt_contain_exact(list, "WAAHOO"); //Assertion OK<br />
+			assert_doesnt_contain_exact(list, 4); //Assertion failed
+		</blockquote>
+	</section>
+</body>
+</html>
