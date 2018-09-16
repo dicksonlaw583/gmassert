@@ -132,7 +132,7 @@
     var result = "",
         height = array_height_2d(argument0);
     //1D
-    if (height == 1 || array_length_2d(argument0, 0) == 0) {
+    if (height == 1 || array_height_2d(argument0) == 1) {
       size = array_length_1d(argument0)
       for (var i = 0; i < size; i++) {
         result += __gma_debug_value__(argument0[@ i]);
@@ -188,8 +188,8 @@
   if (type == __gma_debug_type__(argument1)) {
     switch (type) {
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
@@ -228,8 +228,8 @@
   if (type == __gma_debug_type__(argument1)) {
     switch (type) {
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
@@ -289,8 +289,8 @@
         return len0 > len1;
       break;
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
@@ -347,8 +347,8 @@
         return len0 < len1;
       break;
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
@@ -405,8 +405,8 @@
         return len0 > len1;
       break;
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
@@ -463,8 +463,8 @@
         return len0 < len1;
       break;
       case GMASSERT_TYPE_ARRAY:
-        var a1d = array_length_2d(argument0, 0) == 0,
-            b1d = array_length_2d(argument1, 0) == 0;
+        var a1d = array_height_2d(argument0) == 1,
+            b1d = array_height_2d(argument1) == 1;
         if (a1d != b1d) return false;
         if (a1d) {
           var size = array_length_1d(argument0);
