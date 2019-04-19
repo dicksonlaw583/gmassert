@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>GMAssert v0.1.0</title>
+	<title>GMAssert v1.0.0</title>
 	<style>
 		body {
 			font-family: sans-serif;
@@ -25,16 +25,16 @@
 </head>
 <body>
 	<!-- Top title -->
-	<h1>GMAssert v0.1.0</h1>
-	
+	<h1>GMAssert v1.0.0</h1>
+
 	<!-- Description -->
 	<h2>Description</h2>
 	<p>GMAssert is a library containing useful assertions for debugging and automated unit testing. You can use it to alert you to undesirable runtime conditions and pause the debugger at that point for further inspection.</p>
-	
+
 	<!-- Installation -->
 	<h2>Installation</h2>
 	<p>Simply drag GMAssert.gml into your open project and import constants.txt as macros. If you wish to use the debugger, open <span class="tt">__GMA_BREAKPOINT__</span> and place a breakpoint on the marked line.</p>
-	
+
 	<!-- Index -->
 	<h2>Macro Listings</h2>
 	<dl>
@@ -49,7 +49,7 @@
 		<dt class="tt">GMASSERT_TYPE_ARRAY</dt><dd>Used internally to identify the array type.</dd>
 		<dt class="tt">GMASSERT_TYPE_UNKNOWN</dt><dd>Used internally to identify any type not specified above.</dd>
 	</dl>
-	
+
 	<h2>Function Listings</h2>
 	<dl>
 		<h3>Basic Boolean Assertions</h3>
@@ -84,7 +84,7 @@
 		<dt><a href="#assert_doesnt_contain" class="tt">assert_doesnt_contain(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array does not contain a value equal to <span class="tt">content</span>.</dd>
 		<dt><a href="#assert_doesnt_contain_exact" class="tt">assert_doesnt_contain_exact(got, content, [msg])</a></dt><dd>Assert that the gotten string, list or array does not contain a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</dd>
 	</dl>
-	
+
 	<!-- assert -->
 	<section class="entry">
 		<a name="assert" />
@@ -96,7 +96,7 @@
 			assert(5 &lt; 3); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_false -->
 	<section class="entry">
 		<a name="assert_fail" />
@@ -108,7 +108,7 @@
 			assert_fail(5 &gt; 3); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_equal -->
 	<section class="entry">
 		<a name="assert_equal" />
@@ -118,10 +118,10 @@
 		<blockquote class="example">
 			var total = 3+5;<br />
 			assert_equal(total, 8); //Assertion OK<br />
-            assert_equal(total, "8"); //Assertion failed			
+            assert_equal(total, "8"); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_equalish -->
 	<section class="entry">
 		<a name="assert_equalish" />
@@ -133,7 +133,7 @@
 			assert_equalish(0.1, 0); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_not_equal -->
 	<section class="entry">
 		<a name="assert_not_equal" />
@@ -146,7 +146,7 @@
 			assert_not_equal(total, 1490); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_not_equalish -->
 	<section class="entry">
 		<a name="assert_not_equalish" />
@@ -158,7 +158,7 @@
 			assert_not_equalish(math_get_epsilon(), 0); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_isnt -->
 	<section class="entry">
 		<a name="assert_isnt" />
@@ -175,7 +175,7 @@
 			assert_isnt(arrayA, arrayA); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_greater_than -->
 	<section class="entry">
 		<a name="assert_greater_than" />
@@ -188,7 +188,7 @@
 			assert_greater_than(result, 1); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_less_than -->
 	<section class="entry">
 		<a name="assert_less_than" />
@@ -202,7 +202,7 @@
 			assert_less_than(ds_list_size(list), 3); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_greater_than_or_equal -->
 	<section class="entry">
 		<a name="assert_greater_than_or_equal" />
@@ -216,7 +216,7 @@
 			assert_greater_than_or_equal(lengthdir_y(spd, dir), 0); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_less_than_or_equal -->
 	<section class="entry">
 		<a name="assert_less_than_or_equal" />
@@ -228,7 +228,7 @@
 			assert_less_than_or_equal(dcos(330), 0); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_is_string -->
 	<section class="entry">
 		<a name="assert_is_string" />
@@ -242,7 +242,7 @@
 			assert_is_string(num); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_is_real -->
 	<section class="entry">
 		<a name="assert_is_real" />
@@ -255,7 +255,7 @@
 			assert_is_real(string(num)); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_is_array -->
 	<section class="entry">
 		<a name="assert_is_array" />
@@ -271,7 +271,7 @@
 			assert_is_array(str); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_is_defined -->
 	<section class="entry">
 		<a name="assert_is_defined" />
@@ -285,7 +285,7 @@
 			assert_is_defined(numB); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_isnt_string -->
 	<section class="entry">
 		<a name="assert_isnt_string" />
@@ -299,7 +299,7 @@
 			assert_isnt_string(str); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_isnt_real -->
 	<section class="entry">
 		<a name="assert_isnt_real" />
@@ -309,10 +309,10 @@
 		<blockquote class="example">
 			var str = "3.14";<br />
 			assert_isnt_real(str); //Assertion OK<br />
-			assert_isnt_real(real(str)); //Assertion failed 
+			assert_isnt_real(real(str)); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_isnt_array -->
 	<section class="entry">
 		<a name="assert_isnt_array" />
@@ -325,10 +325,10 @@
 			array[1] = 8;<br />
 			var str = "waahoo";<br />
 			assert_isnt_array(str); //Assertion OK<br />
-			assert_isnt_array(array); //Assertion failed 
+			assert_isnt_array(array); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_isnt_defined -->
 	<section class="entry">
 		<a name="assert_isnt_defined" />
@@ -342,7 +342,7 @@
 			assert_isnt_defined(numA); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_in_range -->
 	<section class="entry">
 		<a name="assert_in_range" />
@@ -354,7 +354,7 @@
 			assert_in_range(exp(1), 3, 4); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_not_in_range -->
 	<section class="entry">
 		<a name="assert_not_in_range" />
@@ -366,12 +366,12 @@
 			assert_not_in_range(sin(pi/8), 0, 1/2); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_contains -->
 	<section class="entry">
 		<a name="assert_contains" />
 		<h2 class="tt">assert_contains(got, content, [msg])</h2>
-		<p>Assert that Assert that the gotten string, list or array contains a value exactly equal to <span class="tt">content</span>.</p>
+		<p>Assert that the gotten string, list or array contains a value exactly equal to <span class="tt">content</span>.</p>
 		<h4>Example</h4>
 		<blockquote class="example">
 			var list = ds_list_create();<br />
@@ -380,7 +380,7 @@
 			assert_contains(list, "WAAHOO"); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_contains_exact -->
 	<section class="entry">
 		<a name="assert_contains_exact" />
@@ -393,12 +393,12 @@
 			assert_contains_exact(sentence, "armadillo"); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_doesnt_contain -->
 	<section class="entry">
 		<a name="assert_doesnt_contain" />
 		<h2 class="tt">assert_doesnt_contain(got, content, [msg])</h2>
-		<p>Assert that Assert that the gotten string, list or array does not contain a value equal to <span class="tt">content</span>.</p>
+		<p>Assert that the gotten string, list or array does not contain a value equal to <span class="tt">content</span>.</p>
 		<h4>Example</h4>
 		<blockquote class="example">
 			var animals;<br />
@@ -409,12 +409,12 @@
 			assert_doesnt_contain(animals, "bear"); //Assertion failed
 		</blockquote>
 	</section>
-	
+
 	<!-- assert_doesnt_contain_exact -->
 	<section class="entry">
 		<a name="assert_doesnt_contain_exact" />
 		<h2 class="tt">assert_doesnt_contain_exact(got, content, [msg])</h2>
-		<p>Assert that Assert that the gotten string, list or array does not contain a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</p>
+		<p>Assert that the gotten string, list or array does not contain a value exactly equal to <span class="tt">content</span> (as compared using <span class="tt">==</span>).</p>
 		<h4>Example</h4>
 		<blockquote class="example">
 			var list = ds_list_create();<br />
